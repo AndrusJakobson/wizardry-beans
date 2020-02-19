@@ -1,12 +1,24 @@
+# Motivation
 
-```
-    sbt clean           # Clean existing build artifacts
+The goal of the repository is to learn how to enable interaction between backend and frontend applications
+using STOMP messaging protocol over WebSockets.
 
-    sbt stage           # Build your application from your project’s source directory
+# Backend app
 
-    sbt run             # Run both backend and frontend builds in watch mode
+Backend app was bootstrapped with [Spring Initializr](https://start.spring.io/).
 
-    sbt dist            # Build both backend and frontend sources into a single distribution artifact
+To run the app you need Java 8 and use the command:
 
-    sbt test            # Run both backend and frontend unit tests
-```
+    $ mvnw spring-boot:run
+
+# Frontend app
+
+Frontend app was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+To run the app you need Node.js 8.12.0 and use the command:
+
+    $ npm start
+
+# Working with STOMP client
+
+Working with [STOMP client library](https://www.npmjs.com/package/@stomp/stompjs) implemented into [src/App.js](./src/App.js)
