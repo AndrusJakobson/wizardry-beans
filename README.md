@@ -1,10 +1,4 @@
-# Motivation
-
-The goal of the repository is to learn how to enable interaction between backend and frontend applications
-using STOMP messaging protocol over WebSockets.
-
 # Backend app
-
 Backend app was bootstrapped with [Spring Initializr](https://start.spring.io/).
 
 To run the app you need Java 8 and use the command:
@@ -15,9 +9,15 @@ To run the app you need Java 8 and use the command:
 
 Frontend app was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Loading the project for the first time, you might need to
+    
+    $ npm install
+
 To run the app you need Node.js 8.12.0 and use the command:
 
     $ npm start
+   
+
 
 # Working with STOMP client
 
