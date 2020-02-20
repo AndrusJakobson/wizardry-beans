@@ -1,13 +1,15 @@
 package com.example.demo.websocket;
 
+import com.example.demo.models.Game;
+import com.example.demo.models.Player;
+import com.example.demo.service.TimerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.web.socket.BinaryMessage;
+import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.AbstractWebSocketHandler;
-
-import java.io.IOException;
 
 /**
  * This class is an implementation for <code>StompSessionHandlerAdapter</code>.
@@ -17,20 +19,37 @@ import java.io.IOException;
  * @author Kalyan
  *
  */
+@Component
 public class WebSocketHandler extends AbstractWebSocketHandler {
-
     private Logger logger = LogManager.getLogger(WebSocketHandler.class);
+    private final Game game;
+    private final TimerService timerService;
+
+    public WebSocketHandler(Game game, TimerService timerService) {
+        this.game = game;
+        this.timerService = timerService;
+        timerService.setWebSocketHandler(this);
+    }
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         super.handleTextMessage(session, message);
-        logger.info("new message!" + message);
-        session.sendMessage(message);
+        logger.debug("new message!---------------   " + message);
+    }
+
+    public void sendUpdate() {
+        game.updateGame();
     }
 
     @Override
-    protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws IOException {
-        System.out.println("New Binary Message Received");
-        session.sendMessage(message);
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        super.afterConnectionEstablished(session);
+        game.addPlayer(new Player(session));
+    }
+
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        super.afterConnectionClosed(session, status);
+        game.removePlayer(session.getId());
     }
 }
