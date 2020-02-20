@@ -12,6 +12,7 @@ Frontend app was bootstrapped with [Create React App](https://github.com/faceboo
 Loading the project for the first time, you might need to
     
     $ npm install
+    $ npm install kaazing-enterprise-client
 
 To run the app you need Node.js 8.12.0 and use the command:
 

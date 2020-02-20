@@ -1,5 +1,6 @@
 import {Client} from "@stomp/stompjs";
 import React, {Component} from 'react';
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 class Home extends Component {
 
@@ -8,21 +9,34 @@ class Home extends Component {
     };
 
     componentDidMount() {
-        this.client = new Client();
+        // this.client = new Client();
+        this.websocket = new W3CWebSocket('ws://localhost:8085/socket');
 
-        this.client.configure({
-            brokerURL: 'ws://localhost:8085/updateWS',
-            onConnect: () => {
-                this.client.subscribe('/game/update', message => {
-                    this.setState({serverTime: message.body});
-                });
-                this.client.subscribe('/external/info', message => {
-                    alert(message);
-                });
-            },
-        });
+        this.websocket.onopen = () => {
+            console.log('on open');
+            this.websocket.send("Hello world");
+        };
 
-        this.client.activate();
+        this.websocket.onmessage = (message) => {
+            console.log(message);
+        };
+        // this.client.configure({
+        //     // brokerURL: 'ws://localhost:8085/updateWS',
+        //     brokerURL: 'ws://localhost:8085/socket',
+        //     onConnect: () => {
+        //         console.log('ON CONNECT');
+        //         this.client.subscribe('/game/update', message => {
+        //             console.log('SUBSCRIBE');
+        //             this.setState({serverTime: message.body});
+        //         });
+        //         this.client.subscribe('/external/info', message => {
+        //             console.log('ALERT');
+        //             alert(message);
+        //         });
+        //     },
+        // });
+        //
+        // this.client.activate();
     }
 
     render() {

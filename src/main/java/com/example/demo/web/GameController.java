@@ -16,18 +16,20 @@ public class GameController {
 
     private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
-    private final SimpMessagingTemplate simpMessagingTemplate;
+//    private final SimpMessagingTemplate simpMessagingTemplate;
 
-    public GameController(SimpMessagingTemplate simpMessagingTemplate) {
-        this.simpMessagingTemplate = simpMessagingTemplate;
-    }
+
+
+//    public GameController(SimpMessagingTemplate simpMessagingTemplate) {
+//        this.simpMessagingTemplate = simpMessagingTemplate;
+//    }
 
     @MessageMapping("/greetings")
     public void greet(String greeting) {
         logger.info("Greeting for {}", greeting);
 
-        String text = "[" + Instant.now() + "]: " + greeting;
-        this.simpMessagingTemplate.convertAndSend("/topic/greetings", text);
+//        String text = "[" + Instant.now() + "]: " + greeting;
+//        this.simpMessagingTemplate.convertAndSend("/topic/greetings", text);
     }
 
 //    @EventListener(SessionConnectedEvent.class)
