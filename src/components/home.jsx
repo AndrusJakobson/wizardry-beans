@@ -16,7 +16,7 @@ class Home extends Component {
         };
 
         this.websocket.onmessage = (message) => {
-            console.log("message: " + message.data);
+            this.setState({playerMove: message.data})
         };
     }
 
@@ -31,11 +31,13 @@ class Home extends Component {
     render() {
         return (
             <div>
+                <p>Write up, right, down, left</p>
                 <p>
-                    Server time: {this.state.serverTime ? this.state.serverTime : 'no data'}
+                    Current move: {this.state.playerMove ? this.state.playerMove : 'no data'}
                 </p>
                 <input onChange={this.handleChange.bind(this)}/>
                 <button onClick={this.sendMessage.bind(this)}>Send message</button>
+                <p>Updates every 200 ms</p>
             </div>
         )
     }
