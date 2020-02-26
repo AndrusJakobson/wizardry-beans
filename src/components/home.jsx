@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import Maze from "./Maze";
+import "./../style/base.css";
 
 class Home extends Component {
 
@@ -16,28 +18,14 @@ class Home extends Component {
         };
 
         this.websocket.onmessage = (message) => {
-            this.setState({playerMove: message.data})
+            this.setState({maze: JSON.parse(message.data)})
         };
-    }
-
-    sendMessage() {
-        this.websocket.send(this.state.value);
-    }
-
-    handleChange(event) {
-        this.setState({value: event.target.value});
     }
 
     render() {
         return (
             <div>
-                <p>Write up, right, down, left</p>
-                <p>
-                    Current move: {this.state.playerMove ? this.state.playerMove : 'no data'}
-                </p>
-                <input onChange={this.handleChange.bind(this)}/>
-                <button onClick={this.sendMessage.bind(this)}>Send message</button>
-                <p>Updates every 200 ms</p>
+                <Maze mazeRows={this.state.maze}/>
             </div>
         )
     }

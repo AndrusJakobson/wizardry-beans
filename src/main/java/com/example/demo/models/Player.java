@@ -7,11 +7,6 @@ import java.io.IOException;
 
 public class Player {
     private WebSocketSession session;
-
-    enum Direction {
-        UP, RIGHT, DOWN, LEFT
-    }
-
     private Direction direction;
 
     public Player(WebSocketSession session) {
@@ -23,9 +18,9 @@ public class Player {
         return this.session.getId();
     }
 
-    public void sendMessage() {
+    public void sendMessage(String message) {
         try {
-            session.sendMessage(new TextMessage(direction.toString()));
+            session.sendMessage(new TextMessage(message));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,6 +41,10 @@ public class Player {
                 direction = Direction.LEFT;
                 break;
         }
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 
 

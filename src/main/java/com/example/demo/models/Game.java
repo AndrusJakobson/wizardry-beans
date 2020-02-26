@@ -1,15 +1,17 @@
 package com.example.demo.models;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.HashMap;
 
 public class Game {
     private HashMap<String, Player> players = new HashMap<>();
-    private Logger logger = LogManager.getLogger(Game.class);
     public static Game game = null;
+    private Maze maze;
+
+    private Game() {
+        maze = new Maze();
+    }
 
     public static Game getInstance() {
         if (game == null) {
@@ -29,7 +31,7 @@ public class Game {
     public void updateGame() {
         for (String playerId : players.keySet()) {
             Player player = players.get(playerId);
-            player.sendMessage();
+            player.sendMessage(maze.getAsJson());
         }
     }
 
