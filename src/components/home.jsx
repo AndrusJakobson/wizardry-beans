@@ -18,7 +18,7 @@ class Home extends Component {
         };
 
         this.websocket.onmessage = (message) => {
-            this.setState({maze: JSON.parse(message.data)})
+            this.setState({maze: JSON.parse(message.data).maze})
         };
     }
 

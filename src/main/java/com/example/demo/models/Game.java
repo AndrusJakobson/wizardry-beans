@@ -7,10 +7,10 @@ import java.util.HashMap;
 public class Game {
     private HashMap<String, Player> players = new HashMap<>();
     public static Game game = null;
-    private Maze maze;
+    private MazeOperations maze;
 
     private Game() {
-        maze = new Maze();
+        maze = new MazeOperations();
     }
 
     public static Game getInstance() {

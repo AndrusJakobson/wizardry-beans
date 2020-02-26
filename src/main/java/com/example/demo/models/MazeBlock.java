@@ -13,8 +13,8 @@ public class MazeBlock {
         return id;
     }
 
-    public void setAsWall() {
-        isWall = true;
+    public void setWall(boolean isWall) {
+        this.isWall = isWall;
     }
 
     public boolean isWall() {

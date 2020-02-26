@@ -18,4 +18,6 @@
 
 .block.wall {
     background-color: #000;
+    box-sizing: border-box;
+    border: #FFF 1px solid;
 }
