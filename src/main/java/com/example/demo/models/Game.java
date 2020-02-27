@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.example.demo.operations.MazeOperations;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.HashMap;
