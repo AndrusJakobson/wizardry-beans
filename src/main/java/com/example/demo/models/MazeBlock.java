@@ -9,8 +9,8 @@ public class MazeBlock {
     private boolean hasPoint = true;
     private Set<Integer> wallSpaceIds = new HashSet<>();
     private Integer wallId;
-
     private Coordinate coordinate;
+    private Player player;
 
     private MazeBlock aboveBlock;
     private MazeBlock rightBlock;
@@ -19,6 +19,14 @@ public class MazeBlock {
 
     MazeBlock(Coordinate coordinate) {
         this.coordinate = coordinate;
+    }
+
+    public boolean isPlayer() {
+        return player != null;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public boolean canPlaceWall(int wallGroupId) {

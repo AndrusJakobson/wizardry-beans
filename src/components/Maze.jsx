@@ -12,7 +12,7 @@ class Maze extends Component {
     }
 
     renderRows() {
-        if (!this.props.mazeRows) {
+        if (!this.props.mazeRows || !Array.isArray(this.props.mazeRows)) {
             return null;
         }
         return this.props.mazeRows.map((item, index) => {

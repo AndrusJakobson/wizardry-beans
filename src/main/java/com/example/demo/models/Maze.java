@@ -49,6 +49,10 @@ public class Maze {
         return maze.get(y).getMazeBlocks().get(x);
     }
 
+    public MazeBlock getBlock(Coordinate coordinate) {
+        return getBlock(coordinate.getX(), coordinate.getY());
+    }
+
     public void drawRectangle(int x1, int y1, int x2, int y2) {
         drawHorizontalLine(x1, x2, y1);
         drawHorizontalLine(x1, x2, y2);

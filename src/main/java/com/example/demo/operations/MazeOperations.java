@@ -20,11 +20,8 @@ import static com.example.demo.models.Maze.MAZE_WIDTH;
 public class MazeOperations {
     private Maze maze;
     private List<MazeWall> walls;
-    private HashMap<Player, Coordinate> activePlayers;
-    private HashMap<Ghost, Coordinate> activeGhosts;
 
     public MazeOperations() {
-        activePlayers = new HashMap<>();
         walls = new ArrayList<>();
         maze = new Maze();
         generateMazeWithOuterWalls();
@@ -72,16 +69,27 @@ public class MazeOperations {
     }
 
     public void addPlayer(Player player) {
-        Coordinate playerCoordinate = new Coordinate(0, 0);
-        activePlayers.put(player, playerCoordinate);
+        MazeBlock playerStartingBlock = maze.getBlock(1, 1);
+        playerStartingBlock.setPlayer(player);
+        player.setPlayerBlock(playerStartingBlock);
     }
 
-    public Coordinate getPlayerCoordinates(Player player) {
-        return activePlayers.get(player);
+    public void movePlayer(Player player) {
+        MazeBlock playerCurrentBlock = player.getPlayerBlock();
+        MazeBlock playerNextBlock = playerCurrentBlock.getNeighbourBlock(player.getDirection());
+        if (playerNextBlock != null && !playerNextBlock.isWall() && !playerNextBlock.isPlayer()) {
+            playerCurrentBlock.setPlayer(null);
+            playerNextBlock.setPlayer(player);
+            player.setPlayerBlock(playerNextBlock);
+        }
     }
 
     public String getAsJson() {
         return JsonMapper.toJson(maze);
+    }
+
+    public Maze getMaze() {
+        return maze;
     }
 
 

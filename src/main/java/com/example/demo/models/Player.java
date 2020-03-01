@@ -8,6 +8,7 @@ import java.io.IOException;
 public class Player {
     private WebSocketSession session;
     private Direction direction;
+    private MazeBlock playerBlock;
 
     public Player(WebSocketSession session) {
         this.session = session;
@@ -22,7 +23,7 @@ public class Player {
         try {
             session.sendMessage(new TextMessage(message));
         } catch (IOException e) {
-            e.printStackTrace();
+            Game.getInstance().removePlayer(session.getId());
         }
     }
 
@@ -47,5 +48,11 @@ public class Player {
         return direction;
     }
 
+    public void setPlayerBlock(MazeBlock mazeBlock) {
+        playerBlock = mazeBlock;
+    }
 
+    public MazeBlock getPlayerBlock() {
+        return playerBlock;
+    }
 }

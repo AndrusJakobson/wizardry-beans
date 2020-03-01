@@ -21,3 +21,7 @@
     box-sizing: border-box;
     border: #FFF 1px solid;
 }
+
+.player {
+    background-color: red;
+}

@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import com.example.demo.operations.MazeOperations;
+import com.example.demo.utilities.JsonMapper;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class Game {
 
     public void addPlayer(Player player) {
         players.put(player.getId(), player);
+        maze.addPlayer(player);
     }
 
     public void removePlayer(String sessionId) {
@@ -32,8 +34,14 @@ public class Game {
     public void updateGame() {
         for (String playerId : players.keySet()) {
             Player player = players.get(playerId);
-            player.sendMessage(maze.getAsJson());
+            maze.movePlayer(players.get(playerId));
+            player.sendMessage(getGameAsJson());
         }
+    }
+
+    private String getGameAsJson() {
+        // maze.getAsJson()
+        return JsonMapper.toJson(this);
     }
 
     public Player getPlayer(WebSocketSession session) {
@@ -43,6 +51,10 @@ public class Game {
             }
         }
         return null;
+    }
+
+    public Maze getMaze() {
+        return maze.getMaze();
     }
 
 }
