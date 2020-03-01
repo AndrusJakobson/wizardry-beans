@@ -6,13 +6,13 @@
 }
 
 .row {
-    height: 1%;
+    height: 2%;
     width: 100%;
 }
 
 .block {
     height: 100%;
-    width: 0.58823529411764705882352941176471%;
+    width: 1.3333333333333333333333333333333%;
     display: inline-block;
 }
 
@@ -24,4 +24,9 @@
 
 .player {
     background-color: red;
+}
+
+.point {
+    font-size: 2.5rem;
+    color: #000eff;
 }

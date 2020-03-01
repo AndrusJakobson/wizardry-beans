@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Maze {
-    public static final int MAZE_HEIGHT = 100;
-    public static final int MAZE_WIDTH = 170;
+    public static final int MAZE_HEIGHT = 50;
+    public static final int MAZE_WIDTH = 75;
     public static final int GHOST_SPAWN_HEIGHT = 3;
     public static final int GHOST_SPAWN_WIDTH = 7;
 

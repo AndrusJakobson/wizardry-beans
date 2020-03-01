@@ -72,6 +72,7 @@ public class MazeOperations {
         MazeBlock playerStartingBlock = maze.getBlock(1, 1);
         playerStartingBlock.setPlayer(player);
         player.setPlayerBlock(playerStartingBlock);
+        player.setPlayerPreviousBlock(playerStartingBlock);
     }
 
     public void movePlayer(Player player) {
@@ -81,16 +82,11 @@ public class MazeOperations {
             playerCurrentBlock.setPlayer(null);
             playerNextBlock.setPlayer(player);
             player.setPlayerBlock(playerNextBlock);
+            player.setPlayerPreviousBlock(playerCurrentBlock);
         }
-    }
-
-    public String getAsJson() {
-        return JsonMapper.toJson(maze);
     }
 
     public Maze getMaze() {
         return maze;
     }
-
-
 }

@@ -9,6 +9,8 @@ public class Player {
     private WebSocketSession session;
     private Direction direction;
     private MazeBlock playerBlock;
+    private MazeBlock playerPreviousBlock;
+    private int points = 0;
 
     public Player(WebSocketSession session) {
         this.session = session;
@@ -44,6 +46,14 @@ public class Player {
         }
     }
 
+    public void addPoint() {
+        points++;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
     public Direction getDirection() {
         return direction;
     }
@@ -54,5 +64,13 @@ public class Player {
 
     public MazeBlock getPlayerBlock() {
         return playerBlock;
+    }
+
+    public void setPlayerPreviousBlock(MazeBlock mazeBlock) {
+        playerPreviousBlock = mazeBlock;
+    }
+
+    public MazeBlock getPlayerPreviousBlock() {
+        return playerPreviousBlock;
     }
 }

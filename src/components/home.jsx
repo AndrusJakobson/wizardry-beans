@@ -23,7 +23,9 @@ class Home extends Component {
         };
 
         this.websocket.onmessage = (message) => {
-            this.setState({maze: JSON.parse(message.data).maze});
+            const responseObject = JSON.parse(message.data);
+            const update = responseObject.maze ? responseObject.maze : responseObject.updatedBlocks;
+            this.setState({maze: update});
         };
     }
 
@@ -51,6 +53,9 @@ class Home extends Component {
     }
 
     render() {
+        if (this.state == null) {
+            return null;
+        }
         let maze = this.state.maze ? this.state.maze.maze : {};
         return (
             <div onKeyDown={this.keyDownHandler.bind(this)}>

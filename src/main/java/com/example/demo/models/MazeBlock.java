@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class MazeBlock {
-    private boolean hasPoint = true;
+    private boolean isPoint = true;
     private Set<Integer> wallSpaceIds = new HashSet<>();
     private Integer wallId;
     private Coordinate coordinate;
@@ -27,6 +27,14 @@ public class MazeBlock {
 
     public void setPlayer(Player player) {
         this.player = player;
+        if (player != null && isPoint()) {
+            player.addPoint();
+            isPoint = false;
+        }
+    }
+
+    public boolean isPoint() {
+        return isPoint;
     }
 
     public boolean canPlaceWall(int wallGroupId) {
@@ -42,6 +50,7 @@ public class MazeBlock {
     }
 
     public void setWall(int wallId) {
+        isPoint = false;
         this.wallId = wallId;
     }
 

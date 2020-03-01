@@ -1,15 +1,16 @@
 package com.example.demo.models;
 
 import com.example.demo.operations.MazeOperations;
+import com.example.demo.response.GameUpdate;
 import com.example.demo.utilities.JsonMapper;
 import org.springframework.web.socket.WebSocketSession;
-
 import java.util.HashMap;
 
 public class Game {
     private HashMap<String, Player> players = new HashMap<>();
     public static Game game = null;
     private MazeOperations maze;
+    private GameUpdate gameUpdate = new GameUpdate();
 
     private Game() {
         maze = new MazeOperations();
@@ -25,6 +26,7 @@ public class Game {
     public void addPlayer(Player player) {
         players.put(player.getId(), player);
         maze.addPlayer(player);
+        player.sendMessage(getGameAsJson());
     }
 
     public void removePlayer(String sessionId) {
@@ -40,7 +42,6 @@ public class Game {
     }
 
     private String getGameAsJson() {
-        // maze.getAsJson()
         return JsonMapper.toJson(this);
     }
 
