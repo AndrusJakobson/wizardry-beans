@@ -23,4 +23,16 @@ public class MazeRow {
     public String getId() {
         return id;
     }
+
+    public void removeBlock(int x) {
+        mazeBlocks.remove(x);
+    }
+
+    public void insertBlock(int x, MazeBlock block) {
+        mazeBlocks.add(x, block);
+    }
+
+    public void insertBlock(MazeBlock block) {
+        mazeBlocks.add(block);
+    }
 }

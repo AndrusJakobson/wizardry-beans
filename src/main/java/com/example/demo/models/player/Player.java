@@ -24,6 +24,7 @@ public class Player {
 
     public void setViewport(Viewport playerViewport) {
         this.playerViewport = playerViewport;
+        playerViewport.setViewportCoordinate(playerBlock.getCoordinate());
     }
 
     public String getId() {

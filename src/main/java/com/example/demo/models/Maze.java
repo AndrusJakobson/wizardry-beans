@@ -9,13 +9,13 @@ public class Maze {
     public static final int GHOST_SPAWN_HEIGHT = 3;
     public static final int GHOST_SPAWN_WIDTH = 7;
 
-    private List<MazeRow> maze;
+    private List<MazeRow> mazeRows;
 
     public Maze() {
-        maze = new ArrayList<>(MAZE_HEIGHT);
+        mazeRows = new ArrayList<>(MAZE_HEIGHT);
         for (int y = 0; y < MAZE_HEIGHT; y++) {
             MazeRow row = new MazeRow(MAZE_WIDTH, y);
-            maze.add(row);
+            mazeRows.add(row);
             for (int x = 0; x < MAZE_WIDTH; x++) {
                 MazeBlock mazeBlock = new MazeBlock(new Coordinate(x, y));
 
@@ -35,18 +35,18 @@ public class Maze {
         }
     }
 
-    public List<MazeRow> getMaze() {
-        return maze;
+    public List<MazeRow> getMazeRows() {
+        return mazeRows;
     }
 
     public MazeBlock getBlock(int x, int y) {
         if (x < 0 || y < 0) {
             return null;
         }
-        if (y >= maze.size() || x >= maze.get(y).getMazeBlocks().size()) {
+        if (y >= mazeRows.size() || x >= mazeRows.get(y).getMazeBlocks().size()) {
             return null;
         }
-        return maze.get(y).getMazeBlocks().get(x);
+        return mazeRows.get(y).getMazeBlocks().get(x);
     }
 
     public MazeBlock getBlock(Coordinate coordinate) {

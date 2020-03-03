@@ -1,5 +1,6 @@
 package com.example.demo.operations;
 
+import com.example.demo.models.Coordinate;
 import com.example.demo.models.Maze;
 import com.example.demo.models.MazeBlock;
 import com.example.demo.models.MazeWall;
@@ -75,7 +76,9 @@ public class MazeOperations {
     }
 
     private MazeBlock getPlayerStartingBlock() {
-         return maze.getBlock(1, 1);
+//         return maze.getBlock(MAZE_WIDTH - 10, 1);
+         return maze.getBlock(MAZE_WIDTH - 35, 1);
+//         return maze.getBlock(1, 1);
     }
 
     public void movePlayer(Player player) {
@@ -93,4 +96,6 @@ public class MazeOperations {
     public Maze getMaze() {
         return maze;
     }
+
+
 }

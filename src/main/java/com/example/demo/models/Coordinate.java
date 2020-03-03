@@ -16,4 +16,13 @@ public class Coordinate {
     public int getY() {
         return y;
     }
+
+    public boolean xDiffers(Coordinate coordinate) {
+        return coordinate.getX() != x;
+    }
+
+    public boolean yDiffers(Coordinate coordinate) {
+        return coordinate.getY() != y;
+    }
+
 }

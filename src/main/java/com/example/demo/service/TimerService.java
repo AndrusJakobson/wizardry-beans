@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TimerService {
-    @Scheduled(fixedRate = 200)
+    @Scheduled(fixedRate = 170)
     public void performTask() {
         Game.getInstance().updateGame();
     }
