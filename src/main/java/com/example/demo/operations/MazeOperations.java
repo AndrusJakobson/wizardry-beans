@@ -72,7 +72,7 @@ public class MazeOperations {
         playerStartingBlock.setPlayer(player);
         player.setPlayerBlock(playerStartingBlock);
         player.setPlayerPreviousBlock(playerStartingBlock);
-        player.setViewport(new Viewport(player, maze));
+        player.setViewport(new Viewport(player, maze, playerStartingBlock.getCoordinate()));
     }
 
     private MazeBlock getPlayerStartingBlock() {
