@@ -1,5 +1,8 @@
 package com.example.demo.models;
 
+import com.example.demo.models.player.Player;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -45,6 +48,7 @@ public class MazeBlock {
         return coordinate.getY() + "-" + coordinate.getX();
     }
 
+    @JsonIgnore
     public boolean hasWallId(int wallId) {
         return wallSpaceIds.contains(wallId);
     }
@@ -64,6 +68,7 @@ public class MazeBlock {
         }
     }
 
+    @JsonIgnore
     public boolean isWallSpace() {
         return wallSpaceIds.size() > 0;
     }
@@ -181,5 +186,10 @@ public class MazeBlock {
             return;
         }
         block.addWallSpaceId(wallSpaceId);
+    }
+
+    @JsonIgnore
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
 }

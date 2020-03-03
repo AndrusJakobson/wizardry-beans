@@ -1,7 +1,7 @@
 package com.example.demo.response;
 
 import com.example.demo.models.MazeBlock;
-import com.example.demo.models.Player;
+import com.example.demo.models.player.Player;
 import com.example.demo.utilities.JsonMapper;
 
 import java.util.ArrayList;

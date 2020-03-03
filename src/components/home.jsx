@@ -24,7 +24,8 @@ class Home extends Component {
 
         this.websocket.onmessage = (message) => {
             const responseObject = JSON.parse(message.data);
-            const update = responseObject.maze ? responseObject.maze : responseObject.updatedBlocks;
+            console.log(responseObject);
+            const update = responseObject;
             this.setState({maze: update});
         };
     }

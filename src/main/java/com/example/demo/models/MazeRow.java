@@ -7,7 +7,7 @@ public class MazeRow {
     private List<MazeBlock> mazeBlocks;
     private String id;
 
-    MazeRow(int size, int index) {
+    public MazeRow(int size, int index) {
         id = String.valueOf(index);
         mazeBlocks = new ArrayList<>(size);
     }

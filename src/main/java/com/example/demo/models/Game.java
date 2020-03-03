@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.example.demo.models.player.Player;
 import com.example.demo.operations.MazeOperations;
 import com.example.demo.response.GameUpdate;
 import com.example.demo.utilities.JsonMapper;
@@ -26,7 +27,6 @@ public class Game {
     public void addPlayer(Player player) {
         players.put(player.getId(), player);
         maze.addPlayer(player);
-        player.sendMessage(getGameAsJson());
     }
 
     public void removePlayer(String sessionId) {
@@ -37,7 +37,7 @@ public class Game {
         for (String playerId : players.keySet()) {
             Player player = players.get(playerId);
             maze.movePlayer(players.get(playerId));
-            player.sendMessage(getGameAsJson());
+            player.sendMessage(player.getPlayerViewport());
         }
     }
 

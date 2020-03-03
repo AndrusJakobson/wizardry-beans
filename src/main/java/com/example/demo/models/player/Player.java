@@ -1,5 +1,9 @@
-package com.example.demo.models;
+package com.example.demo.models.player;
 
+import com.example.demo.models.Direction;
+import com.example.demo.models.Game;
+import com.example.demo.models.MazeBlock;
+import com.example.demo.utilities.JsonMapper;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -11,10 +15,15 @@ public class Player {
     private MazeBlock playerBlock;
     private MazeBlock playerPreviousBlock;
     private int points = 0;
+    private Viewport playerViewport;
 
     public Player(WebSocketSession session) {
         this.session = session;
         direction = Direction.UP;
+    }
+
+    public void setViewport(Viewport playerViewport) {
+        this.playerViewport = playerViewport;
     }
 
     public String getId() {
@@ -44,6 +53,14 @@ public class Player {
                 direction = Direction.LEFT;
                 break;
         }
+    }
+
+    public Viewport getViewport() {
+        return playerViewport;
+    }
+
+    public String getPlayerViewport() {
+        return JsonMapper.toJson(playerViewport);
     }
 
     public void addPoint() {

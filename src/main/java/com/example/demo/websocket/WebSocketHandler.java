@@ -1,7 +1,7 @@
 package com.example.demo.websocket;
 
 import com.example.demo.models.Game;
-import com.example.demo.models.Player;
+import com.example.demo.models.player.Player;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;

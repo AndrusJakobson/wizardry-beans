@@ -1,15 +1,12 @@
 package com.example.demo.operations;
 
-import com.example.demo.models.Coordinate;
-import com.example.demo.models.Ghost;
 import com.example.demo.models.Maze;
 import com.example.demo.models.MazeBlock;
 import com.example.demo.models.MazeWall;
-import com.example.demo.models.Player;
-import com.example.demo.utilities.JsonMapper;
+import com.example.demo.models.player.Player;
+import com.example.demo.models.player.Viewport;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static com.example.demo.models.Maze.GHOST_SPAWN_HEIGHT;
@@ -69,10 +66,16 @@ public class MazeOperations {
     }
 
     public void addPlayer(Player player) {
-        MazeBlock playerStartingBlock = maze.getBlock(1, 1);
+        MazeBlock playerStartingBlock = getPlayerStartingBlock();
+
         playerStartingBlock.setPlayer(player);
         player.setPlayerBlock(playerStartingBlock);
         player.setPlayerPreviousBlock(playerStartingBlock);
+        player.setViewport(new Viewport(player, maze));
+    }
+
+    private MazeBlock getPlayerStartingBlock() {
+         return maze.getBlock(1, 1);
     }
 
     public void movePlayer(Player player) {
@@ -83,6 +86,7 @@ public class MazeOperations {
             playerNextBlock.setPlayer(player);
             player.setPlayerBlock(playerNextBlock);
             player.setPlayerPreviousBlock(playerCurrentBlock);
+            player.getViewport().updateCenterCoordinate(playerNextBlock.getCoordinate());
         }
     }
 
