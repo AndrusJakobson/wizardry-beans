@@ -17,9 +17,6 @@ class Row extends Component {
         }
 
         return this.props.mazeBlocks.map((item, index) => {
-            if (item == null) {
-                return null;
-            }
             return <Block block={item} key={item.id}/>
         })
     }

@@ -78,6 +78,7 @@ public class Viewport {
         viewportCenterCoordinate = playerNextCoordinate;
         int newTopX = getTopX();
         int newTopY = getTopY();
+
         if (oldTopX < newTopX) {
             removeColumn(0);
             addColumn(playerViewport.get(0).getMazeBlocks().size());
@@ -100,9 +101,10 @@ public class Viewport {
     }
 
     private void addColumn(int columnIndex) {
+        System.out.println(columnIndex + " " + Maze.MAZE_HEIGHT + " " + PLAYER_VIEWPORT_HEIGHT);
         for (int y = 0; y < PLAYER_VIEWPORT_HEIGHT; y++) {
             MazeRow row = playerViewport.get(y);
-            row.addBlock(columnIndex, maze.getBlock(getTopX() + columnIndex, y));
+            row.addBlock(columnIndex, maze.getBlock(getTopX() + columnIndex, getTopY() + y));
         }
     }
 

@@ -76,9 +76,7 @@ public class MazeOperations {
     }
 
     private MazeBlock getPlayerStartingBlock() {
-//         return maze.getBlock(MAZE_WIDTH - 10, 1);
-         return maze.getBlock(MAZE_WIDTH - 35, 1);
-//         return maze.getBlock(1, 1);
+         return maze.getBlock(1, 1);
     }
 
     public void movePlayer(Player player) {
