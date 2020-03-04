@@ -44,6 +44,7 @@ public class MazeBlock {
 
     public void setIsNoPlayerZone(boolean isNoPlayerZone) {
         this.isNoPlayerZone = isNoPlayerZone;
+        isPoint = false;
     }
 
     public boolean isPoint() {
