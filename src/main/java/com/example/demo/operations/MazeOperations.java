@@ -38,6 +38,12 @@ public class MazeOperations {
         int endingRow = startingRow + GHOST_SPAWN_HEIGHT - 1;
         maze.drawRectangle(startingColumn, startingRow, endingColumn, endingRow);
 
+        for (int y = startingRow; y < endingRow; y++) {
+            for (int x = startingColumn; x < endingColumn; x++) {
+                getMaze().forbidPlayerMovement(x, y);
+            }
+        }
+
         int doorStart = MAZE_WIDTH / 2 - 1;
         int doorEnd = doorStart + (GHOST_SPAWN_WIDTH / 2) - 1;
         maze.removeHorizontalLine(doorStart, doorEnd, startingRow);
@@ -82,7 +88,7 @@ public class MazeOperations {
     public void movePlayer(Player player) {
         MazeBlock playerCurrentBlock = player.getPlayerBlock();
         MazeBlock playerNextBlock = playerCurrentBlock.getNeighbourBlock(player.getDirection());
-        if (playerNextBlock != null && !playerNextBlock.isWall() && !playerNextBlock.isPlayer()) {
+        if (playerNextBlock != null && playerNextBlock.canPlayerMoveHere()) {
             playerCurrentBlock.setPlayer(null);
             playerNextBlock.setPlayer(player);
             player.setPlayerBlock(playerNextBlock);

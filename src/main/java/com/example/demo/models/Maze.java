@@ -81,6 +81,9 @@ public class Maze {
         }
     }
 
+    public void forbidPlayerMovement(int x, int y) {
+        getBlock(x, y).setIsNoPlayerZone(true);
+    }
 
     private int[] getSortedInts(int a, int b) {
         int biggerInt = Math.max(a, b);

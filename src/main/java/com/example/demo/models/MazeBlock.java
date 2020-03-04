@@ -14,6 +14,7 @@ public class MazeBlock {
     private Integer wallId;
     private Coordinate coordinate;
     private Player player;
+    private boolean isNoPlayerZone = false;
 
     private MazeBlock aboveBlock;
     private MazeBlock rightBlock;
@@ -34,6 +35,15 @@ public class MazeBlock {
             player.addPoint();
             isPoint = false;
         }
+    }
+
+    @JsonIgnore
+    public boolean canPlayerMoveHere() {
+        return !isWall() && !isNoPlayerZone && !isPlayer();
+    }
+
+    public void setIsNoPlayerZone(boolean isNoPlayerZone) {
+        this.isNoPlayerZone = isNoPlayerZone;
     }
 
     public boolean isPoint() {
