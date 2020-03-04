@@ -1,29 +1,34 @@
 package com.example.demo.operations;
 
 import com.example.demo.models.Coordinate;
+import com.example.demo.models.Game;
 import com.example.demo.models.Maze;
 import com.example.demo.models.MazeBlock;
 import com.example.demo.models.MazeWall;
+import com.example.demo.models.ghost.GhostSpawn;
 import com.example.demo.models.player.Player;
 import com.example.demo.models.player.Viewport;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.demo.models.Maze.GHOST_SPAWN_HEIGHT;
-import static com.example.demo.models.Maze.GHOST_SPAWN_WIDTH;
 import static com.example.demo.models.Maze.MAZE_HEIGHT;
 import static com.example.demo.models.Maze.MAZE_WIDTH;
+import static com.example.demo.models.ghost.GhostSpawn.GHOST_SPAWN_HEIGHT;
+import static com.example.demo.models.ghost.GhostSpawn.GHOST_SPAWN_WIDTH;
 
 public class MazeOperations {
     private Maze maze;
     private List<MazeWall> walls;
+    private GhostSpawn ghostSpawn;
+    private Game game;
 
-    public MazeOperations() {
+    public MazeOperations(Game game) {
+        this.game = game;
         walls = new ArrayList<>();
         maze = new Maze();
         generateMazeWithOuterWalls();
-        generateMazeGhostSpawn();
+        generateMazeGhosts();
         generateWalls();
     }
 
@@ -31,22 +36,11 @@ public class MazeOperations {
         maze.drawRectangle(0, 0, MAZE_WIDTH - 1, MAZE_HEIGHT - 1);
     }
 
-    private void generateMazeGhostSpawn() {
+    private void generateMazeGhosts() {
         int startingColumn = (MAZE_WIDTH / 2) - (GHOST_SPAWN_WIDTH / 2);
         int startingRow = (MAZE_HEIGHT / 2) - (GHOST_SPAWN_HEIGHT / 2);
-        int endingColumn = startingColumn + GHOST_SPAWN_WIDTH - 1;
-        int endingRow = startingRow + GHOST_SPAWN_HEIGHT - 1;
-        maze.drawRectangle(startingColumn, startingRow, endingColumn, endingRow);
-
-        for (int y = startingRow; y < endingRow; y++) {
-            for (int x = startingColumn; x < endingColumn; x++) {
-                getMaze().forbidPlayerMovement(x, y);
-            }
-        }
-
-        int doorStart = MAZE_WIDTH / 2 - 1;
-        int doorEnd = doorStart + (GHOST_SPAWN_WIDTH / 2) - 1;
-        maze.removeHorizontalLine(doorStart, doorEnd, startingRow);
+        ghostSpawn = new GhostSpawn(startingColumn, startingRow, maze);
+        ghostSpawn.spawnGhost();
     }
 
     /**

@@ -1,32 +1,38 @@
 package com.example.demo.models;
 
+import com.example.demo.models.ghost.Ghost;
 import com.example.demo.models.player.Player;
 import com.example.demo.operations.MazeOperations;
-import com.example.demo.response.GameUpdate;
 import com.example.demo.utilities.JsonMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketSession;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
+@Component
 public class Game {
     private HashMap<String, Player> players = new HashMap<>();
-    public static Game game = null;
+    private ArrayList<Ghost> ghosts = new ArrayList<>();
+    public static Game game = new Game();;
     private MazeOperations maze;
-    private GameUpdate gameUpdate = new GameUpdate();
 
-    private Game() {
-        maze = new MazeOperations();
+    public Game() {
+        maze = new MazeOperations(this);
     }
 
     public static Game getInstance() {
-        if (game == null) {
-            game = new Game();
-        }
         return game;
     }
 
     public void addPlayer(Player player) {
         players.put(player.getId(), player);
         maze.addPlayer(player);
+    }
+
+    public void addGhost(Ghost ghost) {
+        ghosts.add(ghost);
     }
 
     public void removePlayer(String sessionId) {

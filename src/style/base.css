@@ -26,7 +26,11 @@
     background-color: red;
 }
 
+.ghost {
+    background-color: deepskyblue;
+}
+
 .point {
-    font-size: 2.5rem;
+    font-size: 0.7rem;
     color: #000eff;
 }

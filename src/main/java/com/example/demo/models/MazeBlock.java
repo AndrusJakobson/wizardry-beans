@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.example.demo.models.ghost.Ghost;
 import com.example.demo.models.player.Player;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,6 +15,7 @@ public class MazeBlock {
     private Integer wallId;
     private Coordinate coordinate;
     private Player player;
+    private Ghost ghost;
     private boolean isNoPlayerZone = false;
 
     private MazeBlock aboveBlock;
@@ -27,6 +29,14 @@ public class MazeBlock {
 
     public boolean isPlayer() {
         return player != null;
+    }
+
+    public boolean isGhost() {
+        return ghost != null;
+    }
+
+    public void setGhost(Ghost ghost) {
+        this.ghost = ghost;
     }
 
     public void setPlayer(Player player) {
@@ -64,7 +74,7 @@ public class MazeBlock {
         return wallSpaceIds.contains(wallId);
     }
 
-    public void setWall(int wallId) {
+    public void setWall(Integer wallId) {
         isPoint = false;
         this.wallId = wallId;
     }

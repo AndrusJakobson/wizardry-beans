@@ -34,7 +34,7 @@ public class Player {
         try {
             session.sendMessage(new TextMessage(message));
         } catch (IOException e) {
-            Game.getInstance().removePlayer(session.getId());
+            System.out.println("SEND MESSAGE FAILED, IOException. Player, 37");
         }
     }
 
