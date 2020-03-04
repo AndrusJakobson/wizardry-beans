@@ -101,7 +101,6 @@ public class Viewport {
     }
 
     private void addColumn(int columnIndex) {
-        System.out.println(columnIndex + " " + Maze.MAZE_HEIGHT + " " + PLAYER_VIEWPORT_HEIGHT);
         for (int y = 0; y < PLAYER_VIEWPORT_HEIGHT; y++) {
             MazeRow row = playerViewport.get(y);
             row.addBlock(columnIndex, maze.getBlock(getTopX() + columnIndex, getTopY() + y));
