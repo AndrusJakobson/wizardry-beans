@@ -10,12 +10,10 @@ public class Viewport {
     public static final int PLAYER_VIEWPORT_WIDTH = 35;
     public static final int PLAYER_VIEWPORT_HEIGHT = 21;
     private ArrayList<MazeRow> playerViewport;
-    private Player player;
     private Maze maze;
     private Coordinate viewportCenterCoordinate;
 
-    public Viewport(Player player, Maze maze, Coordinate startingCoordinate) {
-        this.player = player;
+    public Viewport(Maze maze, Coordinate startingCoordinate) {
         this.maze = maze;
         viewportCenterCoordinate = startingCoordinate;
         initViewport();

@@ -30,6 +30,7 @@ public class Game {
     }
 
     public void removePlayer(String sessionId) {
+        players.get(sessionId).getPlayerBlock().setPlayer(null);
         players.remove(sessionId);
     }
 
