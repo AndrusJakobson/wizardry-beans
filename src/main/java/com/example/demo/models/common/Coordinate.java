@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.models.common;
 
 public class Coordinate {
     private int x;

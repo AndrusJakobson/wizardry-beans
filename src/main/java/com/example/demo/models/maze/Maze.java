@@ -1,4 +1,7 @@
-package com.example.demo.models;
+package com.example.demo.models.maze;
+
+import com.example.demo.models.common.Coordinate;
+import com.example.demo.models.common.Direction;
 
 import java.util.ArrayList;
 import java.util.List;

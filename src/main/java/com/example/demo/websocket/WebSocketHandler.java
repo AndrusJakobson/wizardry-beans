@@ -1,9 +1,7 @@
 package com.example.demo.websocket;
 
-import com.example.demo.models.Game;
+import com.example.demo.models.common.Game;
 import com.example.demo.models.player.Player;
-import com.example.demo.service.TimerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -21,7 +19,9 @@ public class WebSocketHandler extends AbstractWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         super.handleTextMessage(session, message);
-        game.getPlayer(session).updateDirection(message.getPayload());
+        if (game.getPlayer(session) != null) {
+            game.getPlayer(session).updateDirection(message.getPayload());
+        }
     }
 
     @Override

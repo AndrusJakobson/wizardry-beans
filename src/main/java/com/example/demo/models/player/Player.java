@@ -1,13 +1,13 @@
 package com.example.demo.models.player;
 
-import com.example.demo.models.Direction;
-import com.example.demo.models.Game;
-import com.example.demo.models.MazeBlock;
-import com.example.demo.utilities.JsonMapper;
+import com.example.demo.models.common.Direction;
+import com.example.demo.models.maze.MazeBlock;
+import com.example.demo.models.ghost.Ghost;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Player {
     private WebSocketSession session;
@@ -16,6 +16,7 @@ public class Player {
     private MazeBlock playerPreviousBlock;
     private int points = 0;
     private Viewport playerViewport;
+    private ArrayList<Ghost> playerGhosts = new ArrayList<>();
 
     public Player(WebSocketSession session) {
         this.session = session;
@@ -26,6 +27,16 @@ public class Player {
         this.playerViewport = playerViewport;
     }
 
+    public ArrayList<Ghost> popPlayerGhosts() {
+        ArrayList<Ghost> playerGhosts = new ArrayList<>(this.playerGhosts);
+        this.playerGhosts.clear();
+        return playerGhosts;
+    }
+
+    public void addPlayerGhosts(ArrayList<Ghost> ghosts) {
+        this.playerGhosts.addAll(ghosts);
+    }
+
     public String getId() {
         return this.session.getId();
     }
@@ -33,8 +44,8 @@ public class Player {
     public void sendUpdate(String message) {
         try {
             session.sendMessage(new TextMessage(message));
-        } catch (IOException e) {
-            System.out.println("SEND MESSAGE FAILED, IOException. Player, line 37");
+        } catch (Exception e) {
+            System.out.println("SEND MESSAGE FAILED, Exception. Player, line 47");
         }
     }
 
@@ -59,15 +70,11 @@ public class Player {
         return playerViewport;
     }
 
-    public String getPlayerViewport() {
-        return JsonMapper.toJson(playerViewport);
-    }
-
     public void addPoint() {
         points++;
     }
 
-    public int getPoints() {
+    public int getScore() {
         return points;
     }
 

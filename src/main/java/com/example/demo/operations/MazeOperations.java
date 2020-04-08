@@ -1,9 +1,9 @@
 package com.example.demo.operations;
 
-import com.example.demo.models.Game;
-import com.example.demo.models.Maze;
-import com.example.demo.models.MazeBlock;
-import com.example.demo.models.MazeWall;
+import com.example.demo.models.common.Game;
+import com.example.demo.models.maze.Maze;
+import com.example.demo.models.maze.MazeBlock;
+import com.example.demo.models.maze.MazeWall;
 import com.example.demo.models.ghost.Ghost;
 import com.example.demo.models.ghost.GhostSpawn;
 import com.example.demo.models.player.Player;
@@ -12,8 +12,8 @@ import com.example.demo.models.player.Viewport;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.demo.models.Maze.MAZE_HEIGHT;
-import static com.example.demo.models.Maze.MAZE_WIDTH;
+import static com.example.demo.models.maze.Maze.MAZE_HEIGHT;
+import static com.example.demo.models.maze.Maze.MAZE_WIDTH;
 import static com.example.demo.models.ghost.GhostSpawn.GHOST_SPAWN_HEIGHT;
 import static com.example.demo.models.ghost.GhostSpawn.GHOST_SPAWN_WIDTH;
 

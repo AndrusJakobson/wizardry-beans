@@ -1,6 +1,6 @@
 package com.example.demo.models.ghost;
 
-import com.example.demo.models.MazeBlock;
+import com.example.demo.models.maze.MazeBlock;
 import com.example.demo.models.player.Player;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

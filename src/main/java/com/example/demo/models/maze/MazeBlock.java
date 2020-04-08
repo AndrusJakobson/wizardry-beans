@@ -1,5 +1,7 @@
-package com.example.demo.models;
+package com.example.demo.models.maze;
 
+import com.example.demo.models.common.Coordinate;
+import com.example.demo.models.common.Direction;
 import com.example.demo.models.ghost.Ghost;
 import com.example.demo.models.player.Player;
 import com.fasterxml.jackson.annotation.JsonIgnore;

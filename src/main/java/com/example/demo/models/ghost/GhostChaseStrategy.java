@@ -1,7 +1,6 @@
 package com.example.demo.models.ghost;
 
-import com.example.demo.models.Coordinate;
-import com.example.demo.models.Maze;
+import com.example.demo.models.maze.Maze;
 import com.example.demo.utilities.AStar;
 
 public class GhostChaseStrategy implements GhostStrategy {

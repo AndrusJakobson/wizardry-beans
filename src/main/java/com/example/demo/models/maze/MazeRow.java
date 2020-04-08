@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.models.maze;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

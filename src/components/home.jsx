@@ -25,8 +25,7 @@ class Home extends Component {
         this.websocket.onmessage = (message) => {
             const responseObject = JSON.parse(message.data);
             console.log(responseObject);
-            const update = responseObject;
-            this.setState({maze: update});
+            this.setState({maze: responseObject.viewport, isAlive: responseObject.playerAlive, score: responseObject.playerScore});
         };
     }
 
@@ -58,9 +57,17 @@ class Home extends Component {
             return null;
         }
         let maze = this.state.maze ? this.state.maze.maze : {};
+        if (this.state.isAlive) {
+            return (
+                <div onKeyDown={this.keyDownHandler.bind(this)}>
+                    <Maze mazeRows={maze}/>
+                </div>
+            )
+        }
+
         return (
-            <div onKeyDown={this.keyDownHandler.bind(this)}>
-                <Maze mazeRows={maze}/>
+            <div>
+                <h1>You lost. Score: {this.state.score}</h1>
             </div>
         )
     }

@@ -1,9 +1,9 @@
 package com.example.demo.models.ghost;
 
-import com.example.demo.models.Coordinate;
-import com.example.demo.models.Direction;
-import com.example.demo.models.Maze;
-import com.example.demo.models.MazeBlock;
+import com.example.demo.models.common.Coordinate;
+import com.example.demo.models.common.Direction;
+import com.example.demo.models.maze.Maze;
+import com.example.demo.models.maze.MazeBlock;
 import com.example.demo.utilities.AStar;
 
 public class GhostCutoffStrategy implements GhostStrategy {

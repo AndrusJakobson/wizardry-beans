@@ -1,8 +1,7 @@
 package com.example.demo.config;
 
-import com.example.demo.models.Game;
+import com.example.demo.models.common.Game;
 import com.example.demo.websocket.WebSocketHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;

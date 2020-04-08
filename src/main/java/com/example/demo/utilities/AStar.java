@@ -3,7 +3,7 @@
 
 package com.example.demo.utilities;
 
-import com.example.demo.models.Coordinate;
+import com.example.demo.models.common.Coordinate;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,13 +1,13 @@
 package com.example.demo.models.ghost;
 
-import com.example.demo.models.Maze;
-import com.example.demo.models.MazeBlock;
-import com.example.demo.models.MazeRow;
+import com.example.demo.models.maze.Maze;
+import com.example.demo.models.maze.MazeBlock;
+import com.example.demo.models.maze.MazeRow;
 import com.example.demo.models.player.Player;
 
 import java.util.ArrayList;
 
-import static com.example.demo.models.Maze.MAZE_WIDTH;
+import static com.example.demo.models.maze.Maze.MAZE_WIDTH;
 
 public class GhostSpawn {
     public static final int GHOST_SPAWN_HEIGHT = 3;
@@ -31,6 +31,7 @@ public class GhostSpawn {
         MazeBlock ghostSpawnBlock = ghostSpawnContentRows.get(0).getMazeBlocks().get(2);
         ghosts.add(getChaserGhost(player, ghostSpawnBlock));
         ghosts.add(getCutoffGhost(player, ghostSpawnBlock));
+        player.addPlayerGhosts(ghosts);
 
         return ghosts;
     }
