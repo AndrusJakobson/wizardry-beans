@@ -27,14 +27,30 @@ public class GhostSpawn {
 
     public ArrayList<Ghost> spawnGhosts(Player player) {
         ArrayList<Ghost> ghosts = new ArrayList<>();
-        Ghost chaserGhost = new Ghost();
-        chaserGhost.setPlayer(player);
-        chaserGhost.setStrategy(new GhostChaseStrategy(maze, chaserGhost));
-        ghosts.add(chaserGhost);
+
         MazeBlock ghostSpawnBlock = ghostSpawnContentRows.get(0).getMazeBlocks().get(2);
-        ghostSpawnBlock.addGhost(chaserGhost);
-        chaserGhost.setCurrentBlock(ghostSpawnBlock);
+        ghosts.add(getChaserGhost(player, ghostSpawnBlock));
+        ghosts.add(getCutoffGhost(player, ghostSpawnBlock));
+
         return ghosts;
+    }
+
+    private Ghost getChaserGhost(Player player, MazeBlock ghostSpawnBlock) {
+        Ghost ghost = new Ghost();
+        ghost.setPlayer(player);
+        ghost.setStrategy(new GhostChaseStrategy(maze, ghost));
+        ghostSpawnBlock.addGhost(ghost);
+        ghost.setCurrentBlock(ghostSpawnBlock);
+        return ghost;
+    }
+
+    private Ghost getCutoffGhost(Player player, MazeBlock ghostSpawnBlock) {
+        Ghost ghost = new Ghost();
+        ghost.setPlayer(player);
+        ghost.setStrategy(new GhostCutoffStrategy(maze, ghost));
+        ghostSpawnBlock.addGhost(ghost);
+        ghost.setCurrentBlock(ghostSpawnBlock);
+        return ghost;
     }
 
     private void initGhostSpawn() {

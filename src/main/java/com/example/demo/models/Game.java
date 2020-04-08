@@ -14,15 +14,16 @@ import java.util.HashMap;
 public class Game {
     private HashMap<String, Player> players = new HashMap<>();
     private ArrayList<Ghost> ghosts = new ArrayList<>();
-    public static Game game = new Game();;
     private MazeOperations maze;
+    public final static int GAME_INTERVAL_IN_MS = 140;
 
     public Game() {
         maze = new MazeOperations(this);
     }
 
-    public static Game getInstance() {
-        return game;
+    public void updateGame() {
+        updateGhostMovement();
+        updatePlayerViewport();
     }
 
     public void addPlayer(Player player) {
@@ -36,7 +37,7 @@ public class Game {
         players.remove(sessionId);
     }
 
-    public void updatePlayerViewport() {
+    private void updatePlayerViewport() {
         for (String playerId : players.keySet()) {
             Player player = players.get(playerId);
             maze.movePlayer(players.get(playerId));
@@ -44,7 +45,7 @@ public class Game {
         }
     }
 
-    public void updateGhostMovement() {
+    private void updateGhostMovement() {
         for (Ghost ghost : ghosts) {
             ghost.move();
         }

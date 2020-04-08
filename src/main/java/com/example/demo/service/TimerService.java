@@ -12,11 +12,10 @@ public class TimerService {
         this.game = game;
     }
 
-    @Scheduled(fixedRate = 170)
+    @Scheduled(fixedRate = Game.GAME_INTERVAL_IN_MS)
     public void performTask() {
         if (game != null) {
-            game.updateGhostMovement();
-            game.updatePlayerViewport();
+            game.updateGame();
         }
     }
 }
