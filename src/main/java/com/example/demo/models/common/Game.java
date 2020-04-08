@@ -13,21 +13,41 @@ import java.util.HashMap;
 
 @Component
 public class Game {
+    public final static int GAME_INTERVAL_IN_MS = 140;
+    public final static int MAX_GAME_TIME_IN_MS = 180000; // 3 minutes
     private HashMap<String, Player> activePlayers = new HashMap<>();
     private HashMap<String, Player> inactivePlayers = new HashMap<>();
     private ArrayList<Ghost> ghosts = new ArrayList<>();
     private MazeOperations maze;
-    public final static int GAME_INTERVAL_IN_MS = 140;
+    private int time = 0;
 
     public Game() {
         maze = new MazeOperations(this);
     }
 
     public void updateGame() {
-        updateGhostMovement();
-        updateActivePlayers();
-        updatePlayerStatus();
-        updateInactivePlayers();
+        if (time >= MAX_GAME_TIME_IN_MS) {
+            resetGame();
+        } else {
+            updateGhostMovement();
+            updateActivePlayers();
+            updatePlayerStatus();
+            updateInactivePlayers();
+            time += GAME_INTERVAL_IN_MS;
+        }
+    }
+
+    private void resetGame() {
+        removeAllPlayers();
+        time = 0;
+        maze = new MazeOperations(this);
+    }
+
+    private void removeAllPlayers() {
+        inactivePlayers.clear();
+        for (String playerId : activePlayers.keySet()) {
+            removePlayer(playerId);
+        }
     }
 
     private void updatePlayerStatus() {
@@ -35,9 +55,6 @@ public class Game {
             Player player = activePlayers.get(playerId);
             for (Ghost ghost : new ArrayList<>(ghosts)) {
                 if (ghost.getCurrentBlock().equals(player.getPlayerBlock())) {
-                    for (Ghost playerGhost : player.popPlayerGhosts()) {
-                        removeGhost(playerGhost);
-                    }
                     removePlayer(playerId);
                 }
             }
@@ -56,11 +73,15 @@ public class Game {
         ghosts.addAll(maze.getPlayerGhosts(player));
     }
 
-    public void removePlayer(String sessionId) {
-        if (activePlayers.get(sessionId) != null) {
-            inactivePlayers.put(sessionId, activePlayers.get(sessionId));
-            activePlayers.get(sessionId).getPlayerBlock().setPlayer(null);
-            activePlayers.remove(sessionId);
+    public void removePlayer(String playerId) {
+        if (activePlayers.get(playerId) != null) {
+            for (Ghost playerGhost : activePlayers.get(playerId).popPlayerGhosts()) {
+                removeGhost(playerGhost);
+            }
+
+            inactivePlayers.put(playerId, activePlayers.get(playerId));
+            activePlayers.get(playerId).getPlayerBlock().setPlayer(null);
+            activePlayers.remove(playerId);
         }
     }
 
@@ -68,10 +89,12 @@ public class Game {
         for (String playerId : activePlayers.keySet()) {
             Player player = activePlayers.get(playerId);
             maze.movePlayer(activePlayers.get(playerId));
+
             Response response = new Response();
             response.setPlayerAlive(true);
             response.setPlayerScore(player.getScore());
             response.setViewport(player.getViewport());
+            response.setTime(time);
 
             player.sendUpdate(JsonMapper.toJson(response));
         }
@@ -85,6 +108,7 @@ public class Game {
             response.setPlayerAlive(false);
             response.setPlayerScore(player.getScore());
             response.setViewport(null);
+            response.setTime(time);
 
             player.sendUpdate(JsonMapper.toJson(response));
         }
