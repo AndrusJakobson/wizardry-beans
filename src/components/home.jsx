@@ -25,7 +25,12 @@ class Home extends Component {
         this.websocket.onmessage = (message) => {
             const responseObject = JSON.parse(message.data);
             console.log(responseObject);
-            this.setState({maze: responseObject.viewport, isAlive: responseObject.playerAlive, score: responseObject.playerScore});
+            this.setState({
+                maze: responseObject.viewport,
+                isAlive: responseObject.playerAlive,
+                score: responseObject.playerScore,
+                time: responseObject.time
+            });
         };
     }
 
@@ -60,6 +65,7 @@ class Home extends Component {
         if (this.state.isAlive) {
             return (
                 <div onKeyDown={this.keyDownHandler.bind(this)}>
+                    <h1>Time: {this.msToTime(this.state.time)}</h1>
                     <Maze mazeRows={maze}/>
                 </div>
             )
@@ -70,6 +76,17 @@ class Home extends Component {
                 <h1>You lost. Score: {this.state.score}</h1>
             </div>
         )
+    }
+
+    msToTime(s) {
+        const ms = s % 1000;
+        s = (s - ms) / 1000;
+        const secs = s % 60;
+        s = (s - secs) / 60;
+        const mins = s % 60;
+        const hrs = (s - mins) / 60;
+
+        return ('' + mins).padStart(2, '0') + ':' + (secs + '').padStart(2, '0');
     }
 }
 

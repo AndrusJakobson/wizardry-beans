@@ -26,20 +26,20 @@ public class Game {
     }
 
     public void updateGame() {
-        if (time >= MAX_GAME_TIME_IN_MS) {
+        if (time <= 0) {
             resetGame();
         } else {
             updateGhostMovement();
             updateActivePlayers();
             updatePlayerStatus();
             updateInactivePlayers();
-            time += GAME_INTERVAL_IN_MS;
+            time -= GAME_INTERVAL_IN_MS;
         }
     }
 
     private void resetGame() {
         removeAllPlayers();
-        time = 0;
+        time = MAX_GAME_TIME_IN_MS;
         maze = new MazeOperations(this);
     }
 
