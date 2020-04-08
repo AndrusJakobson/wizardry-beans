@@ -15,7 +15,8 @@ public class TimerService {
     @Scheduled(fixedRate = 170)
     public void performTask() {
         if (game != null) {
-            game.updateGame();
+            game.updateGhostMovement();
+            game.updatePlayerViewport();
         }
     }
 }

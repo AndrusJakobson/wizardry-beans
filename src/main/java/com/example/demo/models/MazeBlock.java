@@ -15,7 +15,7 @@ public class MazeBlock {
     private Integer wallId;
     private Coordinate coordinate;
     private Player player;
-    private Ghost ghost;
+    private ArrayList<Ghost> ghosts = new ArrayList<>();
     private boolean isNoPlayerZone = false;
 
     private MazeBlock aboveBlock;
@@ -31,12 +31,16 @@ public class MazeBlock {
         return player != null;
     }
 
-    public boolean isGhost() {
-        return ghost != null;
+    public void addGhost(Ghost ghost) {
+        this.ghosts.add(ghost);
     }
 
-    public void setGhost(Ghost ghost) {
-        this.ghost = ghost;
+    public void removeGhost(Ghost ghost) {
+        ghosts.remove(ghost);
+    }
+
+    public boolean isGhost() {
+        return this.ghosts.size() > 0;
     }
 
     public void setPlayer(Player player) {

@@ -1,10 +1,10 @@
 package com.example.demo.operations;
 
-import com.example.demo.models.Coordinate;
 import com.example.demo.models.Game;
 import com.example.demo.models.Maze;
 import com.example.demo.models.MazeBlock;
 import com.example.demo.models.MazeWall;
+import com.example.demo.models.ghost.Ghost;
 import com.example.demo.models.ghost.GhostSpawn;
 import com.example.demo.models.player.Player;
 import com.example.demo.models.player.Viewport;
@@ -40,7 +40,10 @@ public class MazeOperations {
         int startingColumn = (MAZE_WIDTH / 2) - (GHOST_SPAWN_WIDTH / 2);
         int startingRow = (MAZE_HEIGHT / 2) - (GHOST_SPAWN_HEIGHT / 2);
         ghostSpawn = new GhostSpawn(startingColumn, startingRow, maze);
-        ghostSpawn.spawnGhost();
+    }
+
+    public ArrayList<Ghost> getPlayerGhosts(Player player) {
+        return ghostSpawn.spawnGhosts(player);
     }
 
     /**

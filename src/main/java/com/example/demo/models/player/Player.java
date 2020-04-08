@@ -30,11 +30,11 @@ public class Player {
         return this.session.getId();
     }
 
-    public void sendMessage(String message) {
+    public void sendUpdate(String message) {
         try {
             session.sendMessage(new TextMessage(message));
         } catch (IOException e) {
-            System.out.println("SEND MESSAGE FAILED, IOException. Player, 37");
+            System.out.println("SEND MESSAGE FAILED, IOException. Player, line 37");
         }
     }
 

@@ -1,9 +1,9 @@
 package com.example.demo.models.ghost;
 
-import com.example.demo.models.Game;
 import com.example.demo.models.Maze;
 import com.example.demo.models.MazeBlock;
 import com.example.demo.models.MazeRow;
+import com.example.demo.models.player.Player;
 
 import java.util.ArrayList;
 
@@ -25,9 +25,16 @@ public class GhostSpawn {
         initGhostSpawn();
     }
 
-    public void spawnGhost() {
-        Ghost ghost = new Ghost();
-        ghostSpawnContentRows.get(0).getMazeBlocks().get(2).setGhost(ghost);
+    public ArrayList<Ghost> spawnGhosts(Player player) {
+        ArrayList<Ghost> ghosts = new ArrayList<>();
+        Ghost chaserGhost = new Ghost();
+        chaserGhost.setPlayer(player);
+        chaserGhost.setStrategy(new GhostChaseStrategy(maze, chaserGhost));
+        ghosts.add(chaserGhost);
+        MazeBlock ghostSpawnBlock = ghostSpawnContentRows.get(0).getMazeBlocks().get(2);
+        ghostSpawnBlock.addGhost(chaserGhost);
+        chaserGhost.setCurrentBlock(ghostSpawnBlock);
+        return ghosts;
     }
 
     private void initGhostSpawn() {

@@ -4,7 +4,6 @@ import com.example.demo.models.ghost.Ghost;
 import com.example.demo.models.player.Player;
 import com.example.demo.operations.MazeOperations;
 import com.example.demo.utilities.JsonMapper;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -29,10 +28,7 @@ public class Game {
     public void addPlayer(Player player) {
         players.put(player.getId(), player);
         maze.addPlayer(player);
-    }
-
-    public void addGhost(Ghost ghost) {
-        ghosts.add(ghost);
+        ghosts.addAll(maze.getPlayerGhosts(player));
     }
 
     public void removePlayer(String sessionId) {
@@ -40,11 +36,17 @@ public class Game {
         players.remove(sessionId);
     }
 
-    public void updateGame() {
+    public void updatePlayerViewport() {
         for (String playerId : players.keySet()) {
             Player player = players.get(playerId);
             maze.movePlayer(players.get(playerId));
-            player.sendMessage(player.getPlayerViewport());
+            player.sendUpdate(player.getPlayerViewport());
+        }
+    }
+
+    public void updateGhostMovement() {
+        for (Ghost ghost : ghosts) {
+            ghost.move();
         }
     }
 
